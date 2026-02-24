@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSeg.io - Automated Medical Annotation</title>
+    <style>
+        /* --- RESET & BASICS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            font-family: 'Courier New', Courier, monospace;
+            color: #ffffff;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden; /* Prevents scrollbars */
+            position: relative;
+        }
+
+        /* --- VIDEO BACKGROUND --- */
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures video fills screen without stretching */
+            z-index: -2;      /* Puts video at the very back */
+        }
+
+        /* --- GRADIENT OVERLAY --- */
+        /* This sits on top of the video to make text readable */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dark gradient on the left, transparent on the right */
+            background: linear-gradient(to right, 
+                rgba(5,5,5,0.95) 10%, 
+                rgba(5,5,5,0.6) 50%, 
+                rgba(5,5,5,0.2) 100%);
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            font-weight: bold;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: #ff5e3a;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .btn-cta-nav {
+            background-color: #ff5e3a;
+            color: #000;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .login-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 80vh;
+            padding-left: 8%;
+            max-width: 1200px;
+            position: relative; 
+            z-index: 5;
+        }
+
+        h1 {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            font-size: 5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .headline-indent {
+            margin-left: 150px; 
+            display: block;
+        }
+
+        h1 span {
+            display: block;
+        }
+
+        p.subheadline {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            border-left: 2px solid #333;
+            padding-left: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ff5e3a;
+            color: #000;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            cursor: pointer;
+            width: fit-content;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff7f63;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .headline-indent { margin-left: 0; }
+            nav { padding: 20px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="video-overlay"></div>
+
+    <nav>
+        <div class="logo">
+            <span>&#9879;</span> MEDSEG.IO
+        </div>
+        
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#">Solutions</a></li>
+                <li><a href="#">Vision</a></li>
+                <li><a href="#">Docs</a></li>
+            </ul>
+            <a href="#" class="btn-cta-nav">Get Started</a>
+            <a href="#" class="login-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Log In
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>
+            <span>PRECISION</span>
+            <span class="headline-indent">IN MEDICAL</span>
+            <span>SEGMENTATION</span>
+        </h1>
+        
+        <p class="subheadline">
+            Automated annotation for CTs, MRIs, and Surgical Video. 
+            Accelerate your ground truth generation by 10x.
+        </p>
+
+        <button class="btn-primary">View Demo</button>
+    </section>
+
+</body>
+</html>
